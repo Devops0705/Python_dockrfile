@@ -1,2 +1,0 @@
-Since launching in 2006, Amazon Web Services has been providing industry-leading cloud capabilities and expertise that have helped customers transform industries, communities,
-ssh token -- need to generate by going ssh-keygen and give enter(3times) and go to /root/.ssh path and read id_rsa.pub and copy and paste in GitHub.
