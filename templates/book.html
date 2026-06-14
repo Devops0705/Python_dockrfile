@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ movie.title }} – ${{ "%.2f"|format(movie.price) }}</h2>
+<form method="post">
+    <div class="seat-map text-center">
+        <div class="screen">SCREEN</div>
+        {% for r in 'ABCDE' %}
+        <div class="seat-row">
+            <strong>{{ r }}</strong>
+            {% for c in range(1,6) %}
+                {% set seat = r~c %}
+                {% set avail = movie.seats.get(seat, false) %}
+                <div class="seat {% if not avail %}booked{% else %}available{% endif %}" data-seat="{{ seat }}">
+                    {{ c }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="mt-3"><span class="badge bg-success">Available</span> <span class="badge bg-warning text-dark">Selected</span> <span class="badge bg-danger">Booked</span></div>
+    </div>
+    <input type="hidden" name="seats" id="selectedSeats">
+    <div class="text-center mt-4"><button type="submit" class="btn btn-success btn-lg" id="bookBtn" disabled>Continue</button></div>
+</form>
+<script>
+    const selected = new Set();
+    document.querySelectorAll('.seat.available').forEach(seat => {
+        seat.onclick = () => {
+            let id = seat.dataset.seat;
+            if (selected.has(id)) { selected.delete(id); seat.classList.remove('selected'); }
+            else { selected.add(id); seat.classList.add('selected'); }
+            document.getElementById('selectedSeats').value = Array.from(selected).join(',');
+            document.getElementById('bookBtn').disabled = selected.size === 0;
+        };
+    });
+</script>
+{% endblock %}

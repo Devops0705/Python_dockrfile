@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Bookings</h2>
+<table class="table table-bordered bg-white">
+    <thead class="table-dark"><tr><th>Ref</th><th>Movie</th><th>Seats</th><th>Total</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+    {% for b in bookings %}
+    <tr><td>{{ b.ref }}</td><td>{{ b.movie_title }}</td><td>{{ b.seats }}</td><td>${{ "%.2f"|format(b.total) }}</td><td>{{ b.date.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td><a href="/cancel/{{ b.ref }}" class="btn btn-danger btn-sm">Cancel</a></td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

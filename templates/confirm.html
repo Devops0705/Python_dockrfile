@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card text-center bg-success text-white">
+    <div class="card-header">Booking Confirmed!</div>
+    <div class="card-body">
+        <h5>Thank you {{ booking.name }}</h5>
+        <p>Ref: <strong>{{ booking.ref }}</strong><br>Movie: {{ booking.movie_title }}<br>Seats: {{ seats|join(', ') }}<br>Total: ${{ "%.2f"|format(booking.total) }}</p>
+        <a href="/" class="btn btn-light">Home</a> <a href="/mybookings" class="btn btn-outline-light">My Bookings</a>
+    </div>
+</div>
+{% endblock %}

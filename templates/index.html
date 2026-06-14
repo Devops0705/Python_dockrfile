@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-center mb-4">Now Showing</h1>
+<div class="row">
+    {% for m in movies %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title">{{ m.title }}</h5>
+                <p class="card-text">${{ "%.2f"|format(m.price) }}</p>
+                <a href="/movie/{{ m.id }}" class="btn btn-primary">Book</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

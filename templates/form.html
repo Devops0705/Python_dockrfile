@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow">
+    <div class="card-body">
+        <h3>Your Details</h3>
+        <p><strong>{{ movie.title }}</strong> – Seats: {{ seats|join(', ') }} – Total: ${{ "%.2f"|format(seats|length * movie.price) }}</p>
+        <form method="post" action="/confirm">
+            <div class="mb-3"><label>Name</label><input type="text" name="name" class="form-control" required></div>
+            <div class="mb-3"><label>Email</label><input type="email" name="email" class="form-control" required></div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <a href="/movie/{{ movie.id }}" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
